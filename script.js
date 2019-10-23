@@ -38,10 +38,22 @@ function print(addressBookToPrint) {
     for (const contact of addressBookToPrint.contacts) {
       let printString = "";
       for (const key in contact) {
-        printString += `${key}: ${contact[key]}`;
-        printString.padEnd(25, " ");
+        let tempString = "";
+        tempString += `${key}: ${contact[key]} `;
+        tempString = tempString.padEnd(25);
+        printString += tempString;
       }
       console.log(printString);
     }
   }
 }
+
+let addressBook = new AddressBook();
+addressBook.add("Max", "max.ciarelli@gmail.com", "313-333-6666", "Father");
+addressBook.add("Dot", "dot.ciarelli@gmail.com", "313-555-7777", "Mother");
+addressBook.add("Lady", "lady.ciarelli@gmail.com", "313-777-0000", "Sister");
+addressBook.add("Oak", "oak.ciarelli@gmail.com", "313-999-3333", "Brother");
+
+addressBook.deleteAt(2);
+
+print(addressBook);
