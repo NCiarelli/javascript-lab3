@@ -28,3 +28,20 @@ class AddressBook {
     this.contacts.splice(index, 1);
   }
 }
+
+function print(addressBookToPrint) {
+  if (addressBookToPrint.contacts.length === 0) {
+    console.log("The addressbook is empty.");
+    return;
+  } else {
+    console.log("These are the contacts in this addressbook:");
+    for (const contact of addressBookToPrint.contacts) {
+      let printString = "";
+      for (const key in contact) {
+        printString += `${key}: ${contact[key]}`;
+        printString.padEnd(25, " ");
+      }
+      console.log(printString);
+    }
+  }
+}
