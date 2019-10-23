@@ -54,6 +54,8 @@ addressBook.add("Dot", "dot.ciarelli@gmail.com", "313-555-7777", "Mother");
 addressBook.add("Lady", "lady.ciarelli@gmail.com", "313-777-0000", "Sister");
 addressBook.add("Oak", "oak.ciarelli@gmail.com", "313-999-3333", "Brother");
 
+print(addressBook);
+
 addressBook.deleteAt(2);
 
 print(addressBook);
