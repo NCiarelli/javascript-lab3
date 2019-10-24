@@ -40,7 +40,7 @@ class AddressBook {
 
   // filterByRelation: Returns an array of all the contacts that have that relation specified.
   filterByRelation(relation) {
-    filteredContacts = {};
+    let filteredContacts = [];
     for (const contact of this.contacts) {
       if (contact.relation === relation) filteredContacts.push(contact);
     }
@@ -49,8 +49,9 @@ class AddressBook {
 
   // clear: Remove all contacts
   clear() {
-    // this.conatacts = {};  // Does this create floating memory packets that take up space or do JavaScript handlers automatically garbage collect this?
+    // this.contacts = {};  // Does this create floating memory packets that take up space or do JavaScript handlers automatically garbage collect this?
     this.contacts.splice(0, this.contacts.length);
+    // console.log(this.contacts);
   }
 
   // edit: Has five parameters: oldName, name, email, phone, relation. Replace the old contact with the given oldName, with the new values.
@@ -67,7 +68,7 @@ class AddressBook {
 
   // listNames - Return an array of just the names of all the contacts. This will be an array of strings.
   listNames() {
-    nameArray = {};
+    let nameArray = [];
     for (const contact of this.contacts) {
       nameArray.push(contact.name);
     }
@@ -77,7 +78,7 @@ class AddressBook {
   // deleteByName - Has one parameter for name. Delete the contact with the given name.
   deleteByName(name) {
     for (let i = 0; i < this.contacts.length; i++) {
-      if (contacts[i].name === name) {
+      if (this.contacts[i].name === name) {
         this.contacts.splice(i, 1);
         return;
       }
@@ -125,8 +126,35 @@ addressBook.add("Oak", "oak.ciarelli@gmail.com", "313-999-3333", "Brother");
 
 print(addressBook);
 
-addressBook.deleteAt(2);
+// Test deleteAt
+// addressBook.deleteAt(2);
 
+// print(addressBook);
+// Test printNames
+printNames(addressBook);
+// Test filterByName
+console.log(addressBook.filterByName("Oak"));
+
+// Test filterByRelation
+console.log(addressBook.filterByRelation("Sister"));
+
+// // Test clear
+// addressBook.clear();
+// print(addressBook);
+
+// Test edit
+addressBook.edit(
+  "Max",
+  "Maximus",
+  "maximus.ciarelli@gmail.com",
+  "555-555-5555",
+  "Brother"
+);
 print(addressBook);
 
-printNames(addressBook);
+// Test listNames
+console.log(addressBook.listNames());
+
+// Test deleteByName
+addressBook.deleteByName("Lady");
+print(addressBook);
