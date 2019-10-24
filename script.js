@@ -12,6 +12,9 @@ class Contact {
   }
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // AddressBook Class: A class for storing and mainpulating an array of contacts of the Contact class
 // Extended Challenge functions: filterByName, filterByRelation, clear, edit, listNames, deleteByName
 class AddressBook {
@@ -30,12 +33,14 @@ class AddressBook {
     this.contacts.splice(index, 1);
   }
 
-  // filterByName: Returns the first contact with the given name
-  filterByName(name) {
-    for (const contact of this.contacts) {
-      if (contact.name === name) return contact;
+  // findByName - Has one parameter for name. Returns the first contact with the given name. Bonus: ignore case (capitalization). [use Array find]
+  findByName(name) {
+    let upperName = name.toUpperCase();
+    let nameFindFunction = (contactToCheck) => {
+      return upperName === contactToCheck.name.toUpperCase();
     }
-    return null;
+    return this.contacts.find(nameFindFunction);
+
   }
 
   // filterByRelation: Returns an array of all the contacts that have that relation specified.
@@ -132,8 +137,9 @@ print(addressBook);
 // print(addressBook);
 // Test printNames
 printNames(addressBook);
-// Test filterByName
-console.log(addressBook.filterByName("Oak"));
+console.log("==================");
+// Test findByName
+console.log(addressBook.findByName("laDy"));
 
 // Test filterByRelation
 console.log(addressBook.filterByRelation("Sister"));
