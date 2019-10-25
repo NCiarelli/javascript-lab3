@@ -4,16 +4,16 @@
 
 // Contact Class: A class for storing the name, email, phone, and relations of a contact in AddressBook
 class Contact {
-  constructor(name, email, phone, relation) {
-    this.name = name;
-    this.email = email;
-    this.phone = phone;
-    this.relation = relation;
+  constructor(nameParam, emailParam, phoneParam, relationParam) {
+    this.name = nameParam;
+    this.email = emailParam;
+    this.phone = phoneParam;
+    this.relation = relationParam;
   }
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+function capitalizeFirstLetter(stringParam) {
+  return stringParam.charAt(0).toUpperCase() + stringParam.slice(1);
 }
 // AddressBook Class: A class for storing and mainpulating an array of contacts of the Contact class
 // Extended Challenge functions: filterByName, filterByRelation, clear, edit, listNames, deleteByName
@@ -23,33 +23,29 @@ class AddressBook {
   }
 
   // add: Adds a new Contact to the contacts array of AddressBook
-  add(name, email, phone, relation) {
-    let newContact = new Contact(name, email, phone, relation);
-    this.contacts.push(newContact);
+  add(nameParam, emailParam, phoneParam, relationParam) {
+    let addedContact = new Contact(nameParam, emailParam, phoneParam, relationParam);
+    this.contacts.push(addedContact);
   }
 
   // deleteAt: Removes a contact located at index in the contacts array.
-  deleteAt(index) {
-    this.contacts.splice(index, 1);
+  deleteAt(indexParam) {
+    this.contacts.splice(indexParam, 1);
   }
 
   // findByName - Has one parameter for name. Returns the first contact with the given name. Bonus: ignore case (capitalization). [use Array find]
-  findByName(name) {
-    let upperName = name.toUpperCase();
-    let nameFindFunction = (contactToCheck) => {
-      return upperName === contactToCheck.name.toUpperCase();
+  findByName(nameParam) {
+    let upperNameParam = nameParam.toUpperCase();
+    let nameFindFunction = (contactElement) => {
+      return upperNameParam === contactElement.name.toUpperCase();
     }
     return this.contacts.find(nameFindFunction);
 
   }
 
   // filterByRelation: Returns an array of all the contacts that have that relation specified.
-  filterByRelation(relation) {
-    let filteredContacts = [];
-    for (const contact of this.contacts) {
-      if (contact.relation === relation) filteredContacts.push(contact);
-    }
-    return filteredContacts;
+  filterByRelation(relationParam) {
+    return this.contacts.filter((contactElement) => contactElement.relation === relationParam);
   }
 
   // clear: Remove all contacts
@@ -60,9 +56,9 @@ class AddressBook {
   }
 
   // edit: Has five parameters: oldName, name, email, phone, relation. Replace the old contact with the given oldName, with the new values.
-  edit(oldName, name, email, phone, relation) {
-    let contactIndex = this.contacts.findIndex((contact) => contact.name === oldName);
-    this.contacts[contactIndex] = new Contact(name, email, phone, relation);
+  edit(oldNameParam, nameParam, emailParam, phoneParam, relationParam) {
+    let oldContactIndex = this.contacts.findIndex((contactElement) => contactElement.name === oldNameParam);
+    this.contacts[oldContactIndex] = new Contact(nameParam, emailParam, phoneParam, relationParam);
   }
 
   // listNames - Return an array of just the names of all the contacts. This will be an array of strings.
@@ -75,9 +71,9 @@ class AddressBook {
   }
 
   // deleteByName - Has one parameter for name. Delete the contact with the given name.
-  deleteByName(name) {
+  deleteByName(nameParam) {
     for (let i = 0; i < this.contacts.length; i++) {
-      if (this.contacts[i].name === name) {
+      if (this.contacts[i].name === nameParam) {
         this.contacts.splice(i, 1);
         return;
       }
