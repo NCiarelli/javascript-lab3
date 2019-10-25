@@ -62,11 +62,7 @@ class AddressBook {
   // edit: Has five parameters: oldName, name, email, phone, relation. Replace the old contact with the given oldName, with the new values.
   edit(oldName, name, email, phone, relation) {
     let contactIndex = this.contacts.findIndex((contact) => contact.name === oldName);
-    this.contacts[contactIndex].name = name;
-    this.contacts[contactIndex].email = email;
-    this.contacts[contactIndex].phone = phone;
-    this.contacts[contactIndex].relation = relation;
-
+    this.contacts[contactIndex] = new Contact(name, email, phone, relation);
   }
 
   // listNames - Return an array of just the names of all the contacts. This will be an array of strings.
