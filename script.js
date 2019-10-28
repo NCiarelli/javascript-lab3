@@ -125,32 +125,55 @@ print(addressBook);
 // addressBook.deleteAt(2);
 
 // print(addressBook);
-// Test printNames
-printNames(addressBook);
-console.log("==================");
-// Test findByName
-console.log(addressBook.findByName("laDy"));
+// // Test printNames
+// printNames(addressBook);
+// console.log("==================");
+// // Test findByName
+// console.log(addressBook.findByName("laDy"));
 
-// Test filterByRelation
-console.log(addressBook.filterByRelation("Sister"));
+// // Test filterByRelation
+// console.log(addressBook.filterByRelation("Sister"));
 
 // // Test clear
 // addressBook.clear();
 // print(addressBook);
 
-// Test edit
-addressBook.edit(
-  "Max",
-  "Maximus",
-  "maximus.ciarelli@gmail.com",
-  "555-555-5555",
-  "Brother"
-);
-print(addressBook);
+// // Test edit
+// addressBook.edit(
+//   "Max",
+//   "Maximus",
+//   "maximus.ciarelli@gmail.com",
+//   "555-555-5555",
+//   "Brother"
+// );
+// print(addressBook);
 
-// Test listNames
-console.log(addressBook.listNames());
+// // Test listNames
+// console.log(addressBook.listNames());
 
 // Test deleteByName
-addressBook.deleteByName("Lady");
-print(addressBook);
+// addressBook.deleteByName("Lady");
+// print(addressBook);
+
+
+
+// START OF PART 2
+
+// display: function to add all contacts in addressBook to the contact container to display them on the page. Clears out the contact group before adding the contacts.
+function display(addressBookInput) {
+  // Clear previous content from contact group
+  const contactGroup = document.getElementById("contact-group");
+  for (const elementToDelete of contactGroup.children) {
+    elementToDelete.remove();
+  }
+  // Loop through the contacts in the AddressBook
+  for (const contactToAdd of addressBookInput.contacts) {
+    // Add each one in a contact container to the contact group
+    let newContactContainer = document.createElement("p");
+    newContactContainer.classList.add("contact-container");
+    // newContactContainer.innerText.
+  }
+
+}
+
+display(addressBook);
