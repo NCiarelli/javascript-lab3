@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>JavaScript Lab 3</title>
 </head>
@@ -12,7 +13,20 @@
 <body>
   <!-- <h1>Javascript Lab 3 - Address Book</h1> -->
   <form id="contact-form">
-
+    <h2 id="form-heading">My Contacts</h2>
+    <label for="">Name
+      <input type="text" class="contact-form-input" name="name">
+    </label>
+    <label for="">Email
+      <input type="email" class="contact-form-input" name="email">
+    </label>
+    <label for="">Phone
+      <input type="tel" class="contact-form-input" name="phone">
+    </label>
+    <label for="">Relation
+      <input type="text" class="contact-form-input" name="relation">
+    </label>
+    <button type="submit" id="submit-button">Add</button>
   </form>
   <script src="script.js"></script>
 </body>
