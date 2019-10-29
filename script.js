@@ -167,11 +167,46 @@ function display(addressBookInput) {
     elementToDelete.remove();
   }
   // Loop through the contacts in the AddressBook
-  for (const contactToAdd of addressBookInput.contacts) {
+  for (let i = 0; i < addressBookInput.contacts.length; i++) {
+    const contactToAdd = addressBookInput.contacts[i];
     // Add each one in a contact container to the contact group
-    let newContactContainer = document.createElement("p");
+    let newContactContainer = document.createElement("div");
     newContactContainer.classList.add("contact-container");
-    // newContactContainer.innerText.
+
+    // Create the lines for the contact info
+    let newNameLine = document.createElement("p");
+    newNameLine.innerText = `Name: ${contactToAdd.name}`;
+    newContactContainer.appendChild(newNameLine);
+
+    let newEmailLine = document.createElement("p");
+    newEmailLine.innerText = `Email: ${contactToAdd.email}`;
+    newContactContainer.appendChild(newEmailLine);
+
+    let newPhoneLine = document.createElement("p");
+    newPhoneLine.innerText = `Phone #: ${contactToAdd.phone}`;
+    newContactContainer.appendChild(newPhoneLine);
+
+    let newRelationLine = document.createElement("p");
+    newRelationLine.innerText = `Relation: ${contactToAdd.relation}`;
+    newContactContainer.appendChild(newRelationLine);
+
+    // Create a Delete button and add it to the container
+    let newDeleteButton = document.createElement("button");
+    newDeleteButton.setAttribute("type", "button");
+    newDeleteButton.classList.add("delete-button");
+    let newTrashIcon = document.createElement("i");
+    newTrashIcon.classList.add("fas", "fa-trash");
+    newDeleteButton.appendChild(newTrashIcon);
+    newContactContainer.appendChild(newDeleteButton);
+
+    // Add the filled contact container to the contact group div
+    contactGroup.appendChild(newContactContainer);
+
+    // Add the Delete button event listener to delete the new contact and call display again
+    newDeleteButton.addEventListener("click", () => {
+      addressBookInput.deleteAt(i);
+      display(addressBookInput);
+    });
   }
 
 }

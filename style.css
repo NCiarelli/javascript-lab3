@@ -12,8 +12,8 @@ body {
 #contact-form {
   border-radius: 5px;
   background-color: rgb(179,178,176,0.6);
-  margin: 0 auto;
-  width: 60%;
+  margin: 10px auto;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;  
@@ -44,10 +44,32 @@ label {
 
 #contact-group {
   display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
+  justify-content: center;
 }
 
 .contact-container {
   border-radius: 5px;
   background-color: rgba(255,255,255,0.8);
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.contact-container > p {
+  margin: 0; 
+  padding: 0;
+}
+
+.delete-button {
+  border-radius: 50%;
+  color: red;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(50%, 50%); 
 }
