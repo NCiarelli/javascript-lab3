@@ -213,14 +213,14 @@ document.getElementById("contact-group").addEventListener("click", (event) => {
 
     // Method to delete contact using deleteAt and the contactsIndex dataset property created by display
     addressBook.deleteAt(contactContainer.dataset.contactsIndex);
-    display(addressBook);
+    display();
 
     // // Method to delete contact using deleteByName
     // for (let containerChild of contactContainer.children) {
     //   if (containerChild.classList.contains("Name")) {
     //     const contactToBeDeletedName = containerChild.innerText.replace("Name: ", "");
     //     addressBook.deleteByName(contactToBeDeletedName);
-    //     display(addressBook);
+    //     display();
     //     return;
     //   }
     // }
@@ -238,9 +238,13 @@ function addNewContactFromForm(event) {
   // Get the data from the form inputs
   const formData = new FormData(addContactForm);
   // Add the contact info to the addressBook as a new contact
-  addressBook.add(formData.get("name"), formData.get("email"), formData.get("phone"), formData.get("relation"));
+  addressBook.add(
+    formData.get("name"),
+    formData.get("email"),
+    formData.get("phone"),
+    formData.get("relation"));
   // Re-display the addressBook
-  display(addressBook);
+  display();
   // Clear the form
   addContactForm.reset();
 }
