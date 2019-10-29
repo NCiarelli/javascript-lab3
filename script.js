@@ -163,8 +163,8 @@ print(addressBook);
 function display(addressBookInput) {
   // Clear previous content from contact group
   const contactGroup = document.getElementById("contact-group");
-  for (const elementToDelete of contactGroup.children) {
-    elementToDelete.remove();
+  while (contactGroup.firstChild) {
+    contactGroup.firstChild.remove();
   }
   // Loop through the contacts in the AddressBook
   for (let i = 0; i < addressBookInput.contacts.length; i++) {
@@ -174,41 +174,50 @@ function display(addressBookInput) {
     newContactContainer.classList.add("contact-container");
 
     // Create the lines for the contact info
-    let newNameLine = document.createElement("p");
-    newNameLine.innerText = `Name: ${contactToAdd.name}`;
-    newContactContainer.appendChild(newNameLine);
+    function createContactLine(container, label, content) {
+      const newLine = document.createElement("p");
+      newLine.classList.add(label);
+      newLine.innerText = `${label}: ${content}`;
+      container.appendChild(newLine);
+    }
+    createContactLine(newContactContainer, "Name", contactToAdd.name);
+    createContactLine(newContactContainer, "Email", contactToAdd.email);
+    createContactLine(newContactContainer, "Phone", contactToAdd.phone);
+    createContactLine(newContactContainer, "Relation", contactToAdd.relation);
 
-    let newEmailLine = document.createElement("p");
-    newEmailLine.innerText = `Email: ${contactToAdd.email}`;
-    newContactContainer.appendChild(newEmailLine);
-
-    let newPhoneLine = document.createElement("p");
-    newPhoneLine.innerText = `Phone #: ${contactToAdd.phone}`;
-    newContactContainer.appendChild(newPhoneLine);
-
-    let newRelationLine = document.createElement("p");
-    newRelationLine.innerText = `Relation: ${contactToAdd.relation}`;
-    newContactContainer.appendChild(newRelationLine);
 
     // Create a Delete button and add it to the container
     let newDeleteButton = document.createElement("button");
     newDeleteButton.setAttribute("type", "button");
-    newDeleteButton.classList.add("delete-button");
-    let newTrashIcon = document.createElement("i");
-    newTrashIcon.classList.add("fas", "fa-trash");
-    newDeleteButton.appendChild(newTrashIcon);
+    newDeleteButton.classList.add("delete-button", "fas", "fa-trash");
+    // let newTrashIcon = document.createElement("i");
+    // newTrashIcon.classList.add("fas", "fa-trash");
+    // newDeleteButton.appendChild(newTrashIcon);
     newContactContainer.appendChild(newDeleteButton);
 
     // Add the filled contact container to the contact group div
     contactGroup.appendChild(newContactContainer);
-
-    // Add the Delete button event listener to delete the new contact and call display again
-    newDeleteButton.addEventListener("click", () => {
-      addressBookInput.deleteAt(i);
-      display(addressBookInput);
-    });
   }
 
 }
+
+// Add event listener for delete buttons onto the contact group. Uses event delegation to get to all the buttons.
+document.getElementById("contact-group").addEventListener("click", (event) => {
+  if (event.target.classList.contains("delete-button")) {
+    event.stopPropagation();
+    const contactContainer = event.target.parentNode;
+    for (let containerChild of contactContainer.children) {
+      if (containerChild.classList.contains("Name")) {
+        const contactToBeDeletedName = containerChild.innerText.replace("Name: ", "");
+        addressBook.deleteByName(contactToBeDeletedName);
+        display(addressBook);
+        return;
+      }
+    }
+  }
+});
+
+// Add event listener to check when the user submits the form to add a new contact
+// document.getElementById("contact-form").add
 
 display(addressBook);
