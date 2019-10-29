@@ -9,6 +9,7 @@ body {
   background-repeat: no-repeat;
 }
 
+/* The form to add a new contact to the addressBook */
 #contact-form {
   border-radius: 5px;
   background-color: rgb(179,178,176,0.6);
@@ -20,10 +21,12 @@ body {
   padding: 10px;
 }
 
+/* The heading of the add contact form */
 #form-heading {
   color: #fff;
 }
 
+/* All the inputs on the add contact form */
 .contact-form-input {
   border-radius: 5px;
   padding: 10px;
@@ -32,23 +35,26 @@ body {
   box-sizing: border-box;
 }
 
+/* The labels of the inputs on the add contact form */
 label {
   width: 100%;
 }
 
+/* The submit button of the add contact form */
 #submit-button {
   width: 100%;
   margin: 10px;
   padding: 5px;
 }
 
+/* The section that holds all the contact containers */
 #contact-group {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   justify-content: center;
 }
-
+/* The container for holding individual contact info */
 .contact-container {
   border-radius: 5px;
   background-color: rgba(255,255,255,0.8);
@@ -57,11 +63,13 @@ label {
   position: relative;
 }
 
+/* Lines in the contact containers */
 .contact-container > p {
   margin: 0; 
   padding: 0;
 }
 
+/* The buttons that delete individual contacts from the addressBook */
 .delete-button {
   border-radius: 50%;
   color: red;

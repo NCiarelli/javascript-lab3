@@ -25,11 +25,18 @@
       <input type="tel" class="contact-form-input" name="phone">
     </label>
     <label for="">Relation
-      <input type="text" class="contact-form-input" name="relation">
+      <select class="contact-form-input" name="relation">
+        <option value="">---Please Select---</option>
+        <option value="Family">Family</option>
+        <option value="Friend">Friend</option>
+        <option value="Co-worker">Co-worker</option>
+        <option value="Buisness">Buisness</option>
+        <option value="Acquaintance">Acquaintance</option>
+      </select>
     </label>
     <button type="submit" id="submit-button">Add</button>
   </form>
-  <div id="contact-group"></div>
+  <section id="contact-group"></section>
   <script src="script.js"></script>
 </body>
 

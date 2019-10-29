@@ -114,10 +114,10 @@ function printNames(addressBookToPrint) {
 
 let addressBook = new AddressBook();
 print(addressBook); // Test empty book check
-addressBook.add("Max", "max.ciarelli@gmail.com", "313-333-6666", "Father");
-addressBook.add("Dot", "dot.ciarelli@gmail.com", "313-555-7777", "Mother");
-addressBook.add("Lady", "lady.ciarelli@gmail.com", "313-777-0000", "Sister");
-addressBook.add("Oak", "oak.ciarelli@gmail.com", "313-999-3333", "Brother");
+addressBook.add("Max", "max.ciarelli@gmail.com", "313-333-6666", "Family");
+addressBook.add("Dot", "dot.ciarelli@gmail.com", "313-555-7777", "Family");
+addressBook.add("Lady", "lady.ciarelli@gmail.com", "313-777-0000", "Family");
+addressBook.add("Oak", "oak.ciarelli@gmail.com", "313-999-3333", "Family");
 
 print(addressBook);
 
@@ -172,6 +172,8 @@ function display(addressBookInput) {
     // Add each one in a contact container to the contact group
     let newContactContainer = document.createElement("div");
     newContactContainer.classList.add("contact-container");
+    // Add the index of the contact to the container as a data attribute
+    newContactContainer.dataset.contactsIndex = i;
 
     // Create the lines for the contact info
     function createContactLine(container, label, content) {
@@ -190,9 +192,6 @@ function display(addressBookInput) {
     let newDeleteButton = document.createElement("button");
     newDeleteButton.setAttribute("type", "button");
     newDeleteButton.classList.add("delete-button", "fas", "fa-trash");
-    // let newTrashIcon = document.createElement("i");
-    // newTrashIcon.classList.add("fas", "fa-trash");
-    // newDeleteButton.appendChild(newTrashIcon);
     newContactContainer.appendChild(newDeleteButton);
 
     // Add the filled contact container to the contact group div
@@ -203,21 +202,45 @@ function display(addressBookInput) {
 
 // Add event listener for delete buttons onto the contact group. Uses event delegation to get to all the buttons.
 document.getElementById("contact-group").addEventListener("click", (event) => {
+  // Check that the event object is a delete button
   if (event.target.classList.contains("delete-button")) {
+    // If so, stop the event from propagating further
     event.stopPropagation();
-    const contactContainer = event.target.parentNode;
-    for (let containerChild of contactContainer.children) {
-      if (containerChild.classList.contains("Name")) {
-        const contactToBeDeletedName = containerChild.innerText.replace("Name: ", "");
-        addressBook.deleteByName(contactToBeDeletedName);
-        display(addressBook);
-        return;
-      }
-    }
+    // Get the contact container element that is the delete button's parent element
+    const contactContainer = event.target.parentElement;
+
+    // Method to delete contact using deleteAt and the contactsIndex dataset property created by display
+    addressBook.deleteAt(contactContainer.dataset.contactsIndex);
+    display(addressBook);
+
+    // // Method to delete contact using deleteByName
+    // for (let containerChild of contactContainer.children) {
+    //   if (containerChild.classList.contains("Name")) {
+    //     const contactToBeDeletedName = containerChild.innerText.replace("Name: ", "");
+    //     addressBook.deleteByName(contactToBeDeletedName);
+    //     display(addressBook);
+    //     return;
+    //   }
+    // }
   }
 });
 
 // Add event listener to check when the user submits the form to add a new contact
-// document.getElementById("contact-form").add
+const addContactForm = document.getElementById("contact-form");
+addContactForm.addEventListener("submit", addNewContactFromForm)
+
+// Function to collect the new contact info and add it to addressBook
+function addNewContactFromForm(event) {
+  // Prevent the page from reloading
+  event.preventDefault();
+  // Get the data from the form inputs
+  const formData = new FormData(addContactForm);
+  // Add the contact info to the addressBook as a new contact
+  addressBook.add(formData.get("name"), formData.get("email"), formData.get("phone"), formData.get("relation"));
+  // Re-display the addressBook
+  display(addressBook);
+  // Clear the form
+  addContactForm.reset();
+}
 
 display(addressBook);
