@@ -71,6 +71,7 @@ label {
 
 /* The buttons that delete individual contacts from the addressBook */
 .delete-button {
+  background-color: rgba(255,255,255,0.8);
   border-radius: 50%;
   color: red;
   width: 30px;

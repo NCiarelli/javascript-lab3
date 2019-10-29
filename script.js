@@ -160,18 +160,20 @@ print(addressBook);
 // START OF PART 2
 
 // display: function to add all contacts in addressBook to the contact container to display them on the page. Clears out the contact group before adding the contacts.
-function display(addressBookInput) {
+function display() {
   // Clear previous content from contact group
   const contactGroup = document.getElementById("contact-group");
   while (contactGroup.firstChild) {
     contactGroup.firstChild.remove();
   }
   // Loop through the contacts in the AddressBook
-  for (let i = 0; i < addressBookInput.contacts.length; i++) {
-    const contactToAdd = addressBookInput.contacts[i];
+  for (let i = 0; i < addressBook.contacts.length; i++) {
+    const contactToAdd = addressBook.contacts[i];
+
     // Add each one in a contact container to the contact group
     let newContactContainer = document.createElement("div");
     newContactContainer.classList.add("contact-container");
+
     // Add the index of the contact to the container as a data attribute
     newContactContainer.dataset.contactsIndex = i;
 
@@ -227,7 +229,7 @@ document.getElementById("contact-group").addEventListener("click", (event) => {
 
 // Add event listener to check when the user submits the form to add a new contact
 const addContactForm = document.getElementById("contact-form");
-addContactForm.addEventListener("submit", addNewContactFromForm)
+addContactForm.addEventListener("submit", addNewContactFromForm);
 
 // Function to collect the new contact info and add it to addressBook
 function addNewContactFromForm(event) {
@@ -243,4 +245,4 @@ function addNewContactFromForm(event) {
   addContactForm.reset();
 }
 
-display(addressBook);
+display();
